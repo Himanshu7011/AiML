@@ -1,0 +1,123 @@
+Numpy Documents:
+
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5])
+arr = numpy.concatenate((arr1, arr2))
+
+>> Output: [1 2 3 4 5]
+
+numpy.concatenate((a1, a2, ...), axis=0, out=None, dtype=None, casting="same_kind")
+
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6]])
+np.concatenate((a, b.T), axis=1) # If axis is 1, join the array along the rows. 
+
+#Query 1: What is b.T here with axis=1? 
+
+>> Output: 
+array([[1, 2, 5],
+       [3, 4, 6]])
+                  
+np.concatenate((a, b), axis=0)   # If axis is 0, arrays are added as it is at the end.
+>> Output:
+array([[1, 2],
+       [3, 4],
+       [5, 6]])
+       
+np.concatenate((a, b), axis=None) # If axis is None, arrays are flattened before use.
+>> Output:
+array([1, 2, 3, 4, 5, 6])
+
+
+hstack: Stack arrays in sequence horizontally (column wise).
+------
+import numpy as np
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+arr = np.hstack((arr1, arr2))
+print(arr)
+
+>> Output:
+[1 2 3 4 5 6]
+
+vstack: Stack arrays in sequence vertically (row wise).
+------
+
+arr = np.vstack((arr1, arr2))
+print(arr)
+>> Output:
+[[1 2 3]
+ [4 5 6]]
+ 
+dstack: Stack arrays in sequence depth wise (along third axis).
+------
+
+arr = np.dstack((arr1, arr2))
+print(arr)
+>> Output:
+[[[1 4]
+  [2 5]
+  [3 6]]]
+
+arrange: Return evenly spaced values within a given interval.
+-------
+x = np.arange(1, 29, step=2)
+
+
+
+array_split: Split an array into multiple sub-arrays.
+-----------
+Signature: np.array_split(ary, indices_or_sections, axis=0)
+
+
+split: Split an array into multiple sub-arrays.
+-----
+Signature: np.split(ary, indices_or_sections, axis=0)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+searchsorted: Find indices where elements of v should be inserted in a to maintain order.
+------------
+x = np.array([1, 2, 3, 4, 5, 4, 4])
+print(x)
+ind = x.searchsorted(3)
+ind # This is 2.
+
+>> [1 2 3 4 5 4 4]
+2
+
+Query 2: What is the difference between:
+x.searchsorted(3,side='left') & x.searchsorted(3,side='right')
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+where: Return elements chosen from `x` or `y` depending on `condition`.
+where(condition, [x, y])
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Pseudo Random and True Random.
+Random number does NOT mean a different number every time. Random means something that can not be predicted logically.
+Computers work on programs, and programs are definitive set of instructions. So it means there must be some algorithm to generate a random number as well.
+
+If there is a program to generate random number it can be predicted, thus it is not truly random.
+
+Random numbers generated through a generation algorithm are called pseudo random.
+
+Can we make truly random numbers?
+
+Yes. In order to generate a truly random number on our computers we need to get the random data from some outside source. This outside source is generally our keystrokes, mouse movements, data on network etc.
+
+We do not need truly random numbers, unless it is related to security (e.g. encryption keys) or the basis of application is the randomness (e.g. Digital roulette wheels).
+
+numpy.randint(5) : Generate one random int value less than 5.
+random.randint(10, 20) : Generate one random value between 10-20.
+x=random.randint(10, 20, size=(5), dtype=int) : Generate ndarray of size 5, range should be between 10-20.
+
+floatNum = random.rand(3) # Generate 3 float values based on given input. Here 3 float values are created.
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+from numpy import random
+x = random.choice([3, 5, 7, 9, 10, 12, 15], size=(3,3)) # choice select the random number from the given array and create the 2D array of size give. i.e 3x3
+print(x)
+
+x = random.choice([3, 5, 7, 9], p=[0.1, 0.1, 0.1, 0.7], size=(10)) # p = probability of occurance.
